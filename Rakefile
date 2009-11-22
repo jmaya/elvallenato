@@ -5,10 +5,10 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "elvallenato"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Gem to support elvallentato.com}
+    gem.description = %Q{Gem to support el vallenato.com}
     gem.email = "jmaya@lasamaria.com"
-    gem.homepage = "http://github.com/jmaya/elvallenato"
+#    gem.homepage = "http://github.com/jmaya/elvallenato"
     gem.authors = ["John Maya"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

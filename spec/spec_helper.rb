@@ -4,6 +4,8 @@ require 'elvallenato'
 require 'spec'
 require 'spec/autorun'
 
+include ElVallenato
+
 Spec::Runner.configure do |config|
   
 end
