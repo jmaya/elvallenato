@@ -19,5 +19,13 @@ describe Letra do
   it "should have a body" do
     @l.body.scan(/y q sabe y no sabe nada,/)[0].should eql "y q sabe y no sabe nada,"
   end
+
+  it "chould have a composer" do
+    @l.composer.should eql "Kaleth Morales"
+  end
+
+  it "should have an artist" do
+        @l.artist.should eql "Kaleth Morales"
+  end
   
 end
