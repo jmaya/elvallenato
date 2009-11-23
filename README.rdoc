@@ -2,6 +2,22 @@
 
 This application is designed to scrap data from el vallenato.com
 
+== Examples
+require 'rubygems'
+require 'elvallenato'
+#Optional if you want to import the namespace
+include ElVallenato
+s = Search.new('canta', "Jorge")
+s.fetch_content
+letras = s.collect_lirics
+puts letras[0].title
+puts letras[0].body
+puts letras[0].artist
+puts letras[0].composer
+
+#if you want to go to the next page fetch the contents again
+s.fetch_content
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
