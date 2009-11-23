@@ -24,6 +24,6 @@ module ElVallenato
     def artist
       @doc.search("td .text_std")[8].inner_html
     end
-
+    
   end
 end
