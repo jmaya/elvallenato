@@ -1,6 +1,6 @@
 = elvallenato
 
-Description goes here.
+This application is designed to scrap data from el vallenato.com
 
 == Note on Patches/Pull Requests
  
