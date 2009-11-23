@@ -3,6 +3,7 @@
 This application is designed to scrap data from el vallenato.com
 
 == Examples
+<pre>:::ruby
 require 'rubygems'
 require 'elvallenato'
 #Optional if you want to import the namespace
@@ -17,7 +18,7 @@ puts letras[0].composer
 
 #if you want to go to the next page fetch the contents again
 s.fetch_content
-
+</pre>
 == Note on Patches/Pull Requests
  
 * Fork the project.
