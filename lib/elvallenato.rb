@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'hpricot'
 require 'redcloth'
+
 module ElVallenato
 
 end
