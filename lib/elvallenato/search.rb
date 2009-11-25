@@ -3,7 +3,7 @@ module ElVallenato
   class Search
     attr_reader :doc
     require 'open-uri'
-    require 'CGI'
+    require 'cgi'
     
     def initialize(mode,query)
       @mode = mode
