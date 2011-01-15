@@ -5,7 +5,3 @@ require 'rspec'
 require 'rspec/autorun'
 
 include ElVallenato
-
-Spec::Runner.configure do |config|
-  
-end

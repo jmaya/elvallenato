@@ -40,7 +40,7 @@ module ElVallenato
 
     def load_content=(lc)
       @load_content = lc
-      @doc = Hpricot(@load_content)
+      @doc = Nokogiri::HTML(@load_content)
     end
 
     def fetch_content

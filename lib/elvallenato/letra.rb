@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 module ElVallenato
   class Letra
     
@@ -6,7 +8,7 @@ module ElVallenato
     def initialize(content)
       
       @content = content
-      @doc = Hpricot(@content)
+      @doc = Nokogiri::HTML(@content)
     end
 
     def title
@@ -14,7 +16,7 @@ module ElVallenato
     end
 
     def body
-      @doc.search("td .text_std")[6].inner_html.gsub(/<br \/>/, "\n")
+      @doc.search("td .text_std")[6].inner_html
     end
 
     def composer

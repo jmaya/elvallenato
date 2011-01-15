@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "RedCloth"
-gem "hpricot"
+gem "nokogiri"
 gem "rspec"
 gem "autotest"
 gem "autotest-growl"

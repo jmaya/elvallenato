@@ -14,7 +14,7 @@ GEM
       sys-uname
     autotest-growl (0.2.9)
     diff-lcs (1.1.2)
-    hpricot (0.8.3)
+    nokogiri (1.4.4)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -34,5 +34,5 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   elvallenato!
-  hpricot
+  nokogiri
   rspec

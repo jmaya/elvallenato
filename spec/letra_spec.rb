@@ -1,31 +1,29 @@
-# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Letra do
   before(:each) do
-    @content = File.read(File.join(File.dirname(__FILE__), "fixtures", "siete_palabras.htm"))
-    @l = Letra.new(@content)
+    @content = File.open(File.join(File.dirname(__FILE__), "fixtures", "siete_palabras.htm"),'r:ISO-8859-1').read
+    @letra = Letra.new(@content)
   end
   
   it "should be started with the html content" do
-    l = Letra.new(@content)
-    l.content.size.should eql 71004
+    @letra.content.size.should eql 71004
   end
 
   it "should have a title" do
-    @l.title.should eql "Siete Palabras"
+    @letra.title.should eql "Siete Palabras"
   end
   
   it "should have a body" do
-    @l.body.scan(/y q sabe y no sabe nada,/)[0].should eql "y q sabe y no sabe nada,"
+    @letra.body.scan(/y q sabe y no sabe/)[0].should == "y q sabe y no sabe"
   end
 
   it "chould have a composer" do
-    @l.composer.should eql "Kaleth Morales"
+    @letra.composer.should eql "Kaleth Morales"
   end
 
   it "should have an artist" do
-        @l.artist.should eql "Kaleth Morales"
+        @letra.artist.should eql "Kaleth Morales"
   end
   
 end
