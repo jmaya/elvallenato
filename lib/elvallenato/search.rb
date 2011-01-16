@@ -1,70 +1,40 @@
+require 'cgi'
+require 'open-uri'
+require 'URI'
+
 module ElVallenato
   
   class Search
-    attr_reader :doc
-    require 'open-uri'
-    require 'cgi'
-    
-    def initialize(mode,query)
-      @mode = mode
-      @query = query
-      url
+    attr_reader :mode,:term,:url
+
+    def initialize(mode,term)
+      @current_link = 0
+      @mode = CGI.escape(mode)
+      @term = CGI.escape(term)
+      @url = "http://www.elvallenato.com/letras/busqueda.php?x=#{@term}&busca=#{@mode}&image.x=12&image.y=11" 
+      @base = "http://" + URI.parse(@url).host
     end
 
-    def url
-      return @url if !@url.nil?
-      if @query.nil? or @query == ""
-        @url = "http://www.elvallenato.com/letras/busqueda.php?x=&busca=#{@mode}&image.x=8&image.y=6"
-      else
-        @url = "http://www.elvallenato.com/letras/busqueda.php?x=#{CGI.escape(@query)}&busca=#{@mode}&image.x=12&image.y=11"
-      end
-    end
-
-    def url=(url)
-      @url = url
-    end
-
-    def next_url=(next_url)
-      @next_url = next_url
+    def content
+      @content ||= OpenURI.open_uri(@url).read
     end
 
     def next_url
-      partial_next = "http://www.elvallenato.com/letras/"
-      @doc.search("a").each do |d|
-        partial_next << d["href"] if d.inner_html == 'Siguiente >>'
+      return nil if @current_link == pages 
+      if @current_link > 0
+        link = @all_links[@current_link]["href"]
+        @current_link += 1
+        return [@base,link].join("/")
+      else
+        @all_links ||= Nokogiri::HTML.parse(content).css("span.class5 a")
+        link = @all_links[0]["href"]
+        @current_link += 1
+        return [@base,link].join("/")
       end
-      @url = partial_next
-      partial_next == "http://www.elvallenato.com/letras/" ? nil : partial_next
-      #     @next_url
-    end
 
-    def load_content=(lc)
-      @load_content = lc
-      @doc = Nokogiri::HTML(@load_content)
     end
-
-    def fetch_content
-      @load_content = open(@url).read
-      @doc = Hpricot(@load_content)
-    end
-    
-    def collect_links
-      @doc.search(".class10").collect {|e| clean_url(e.at("a")["href"])}
-    end
-
-    def collect_lirics
-      collect_links.collect {|l| Letra.new(open(clean_url(l)).read)}
-    end
-
-    def clean_url(url_in)
-      first_part = url_in.gsub(/(\d+)\/.+$/,"\\1/")
-      second_part = url_in.scan(/\d+\/(.+)$/)[0][0]
-      #       url_in.gsub(/\s/, "+")
-      first_part + CGI.escape(second_part)
-    end
-
-    def fetch
-      load_content = open(clean_url(@url)).read
+    def pages
+        @pages ||= Nokogiri::HTML.parse(content).css("span.class5 a").count - 3
     end
   end
 end
