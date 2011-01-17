@@ -34,7 +34,14 @@ module ElVallenato
 
     end
     def pages
-        @pages ||= Nokogiri::HTML.parse(content).css("span.class5 a").count - 3
+       # @pages ||= Nokogiri::HTML.parse(content).css("span.class5 a").count - 3
+       links.size
+    end
+
+    def links 
+      @page_links ||= Nokogiri::HTML.parse(content).css("span.class5 a").collect do |e|
+        e["href"]  if e["href"] =~ /pg=\d+$/
+      end.compact.sort.uniq
     end
   end
 end

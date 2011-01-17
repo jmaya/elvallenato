@@ -27,29 +27,34 @@ describe Search do
     end
 
     it "should load the content only 1 time (we are using memoization)" do
-        OpenURI.should_receive(:open_uri).exactly(1).times
-        @search.content
-        @search.content
-        @search.content
+      OpenURI.should_receive(:open_uri).exactly(1).times
+      @search.content
+      @search.content
+      @search.content
     end
   end
 
   it "should have n pages of searches" do
-      @search.pages.should == 44
+    @search.pages.should == 44
   end
 
-    it "should have a valid page" do
-      (1..44).each do |t|
+  it "should have a valid page" do
+    (1..44).each do |t|
       @search.next_url.should eql "http://www.elvallenato.com/busqueda.php?x=Diomedes&busca=canta&pg=#{t}"
-      end
-
-      #the next one should be nil
-      # @search.next_url.should be_nil
     end
-  # 
-  #   it "should collect links" do
-  #     @s.collect_links.size.should eql 20
-  #   end
+
+    #the next one should be nil
+    @search.next_url.should be_nil
+  end
+
+
+  xit "should should parse a search page" do
+    @search.parse.should == 'xxx' 
+  end
+
+  # it "should collect links" do
+  #   @s.collect_links.size.should eql 20
+  # end
   # 
   #   it "should clean the url" do
   #     @s.clean_url("http://www.elvallenato.com/letras/letras/347/Bonita-Diomedes Diaz-Diomedes Diaz.htm").should eql "http://www.elvallenato.com/letras/letras/347/Bonita-Diomedes+Diaz-Diomedes+Diaz.htm"
