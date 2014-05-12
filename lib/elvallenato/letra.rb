@@ -6,25 +6,24 @@ module ElVallenato
     attr_reader :content
     
     def initialize(content)
-      
       @content = content
       @doc = Nokogiri::HTML(@content)
     end
 
     def title
-      @doc.at(".text_title").inner_html
+      @title ||= @doc.at(".text_title").text
     end
 
     def body
-      @doc.search("td .text_std")[6].inner_html
+      @body ||= @doc.search("td .text_std")[6].inner_html
     end
 
     def composer
-      @doc.search("td .text_std")[9].inner_html
+      @composer ||= @doc.search("td .text_std")[9].text
     end
 
     def artist
-      @doc.search("td .text_std")[8].inner_html
+      @artist ||= @doc.search("td .text_std")[8].text
     end
     
   end

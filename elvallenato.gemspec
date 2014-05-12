@@ -18,4 +18,12 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('guard')
+  s.add_development_dependency('guard-rspec')
+  s.add_development_dependency('guard-bundler')
+  s.add_development_dependency('rb-fsevent')
+  s.add_development_dependency('awesome_print')
+  s.add_dependency('RedCloth')
+  s.add_dependency('nokogiri')
 end

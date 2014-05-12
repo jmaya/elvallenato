@@ -34,7 +34,6 @@ module ElVallenato
 
     end
     def pages
-       # @pages ||= Nokogiri::HTML.parse(content).css("span.class5 a").count - 3
        links.size
     end
 
@@ -42,6 +41,25 @@ module ElVallenato
       @page_links ||= Nokogiri::HTML.parse(content).css("span.class5 a").collect do |e|
         e["href"]  if e["href"] =~ /pg=\d+$/
       end.compact.sort.uniq
+    end
+
+    def liric_links
+     @liric_links ||= Nokogiri::HTML.parse(content).css('.class10 a').collect do |e| 
+       clean_url(e["href"])
+     end.compact.sort.uniq
+    end
+
+    def clean_url(url)
+      url =~ /letras\/letras\/(\d+)\/(.+?)$/
+      id = $1
+      song_name = CGI.escape($2)
+      [@base,"letras","letras",id,song_name].join("/")
+    end
+
+    def letras 
+      liric_links.collect do |link|
+        Letra.new(OpenURI.open_uri(link).read)
+      end
     end
   end
 end
